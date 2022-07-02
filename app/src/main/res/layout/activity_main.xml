@@ -122,8 +122,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/quantityTitle"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/buttonMinus"
             android:text="0"
             android:textColor="@color/black"
@@ -149,6 +149,7 @@
             android:layout_marginStart="280dp"
             android:layout_toRightOf="@+id/actualPrice"
             android:backgroundTint="#654D4D"
+            android:onClick="increaseQuantity"
             android:text="+" />
 
         <Button
