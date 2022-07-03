@@ -10,7 +10,6 @@ public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void increaseQuantity(View view) {
         quantity = quantity + 1;
-        TextView quantity = findViewById(R.id.realQuantity);
-        quantity.setText("1");
+        TextView quantityTextView = findViewById(R.id.realQuantity);
+        quantityTextView.setText("" + quantity);
     }
 
+    public void decreaseQuantity(View view) {
+        quantity = quantity - 1;
+        TextView decreaseTextView = findViewById(R.id.realQuantity);
+        decreaseTextView.setText("" + quantity);
+    }
 }
