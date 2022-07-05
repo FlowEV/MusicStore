@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     HashMap goodsMap;
     String goodsName;
+    double price;
 
     @Override
 
@@ -28,7 +30,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createSpinner();
+        createMap();
+    }
+
+    void createMap(){
+        goodsMap = new HashMap();
+        goodsMap.put("guitar", 500.0);
+        goodsMap.put("drums", 1500.0);
+        goodsMap.put("keyboard", 1000.0);
+    }
+
+    void createSpinner(){
         spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
         spinnerArrayList = new ArrayList();
 
         spinnerArrayList.add("guitar");
@@ -38,18 +53,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,spinnerArrayList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
-
-        goodsMap = new HashMap();
-        goodsMap.put("guitar", 500);
-        goodsMap.put("drums", 1500);
-        goodsMap.put("keyboard", 1000);
-
     }
 
     public void increaseQuantity(View view) {
         quantity = quantity + 1;
         TextView quantityTextView = findViewById(R.id.realQuantity);
         quantityTextView.setText("" + quantity);
+        TextView priceTextView = findViewById(R.id.actualPrice);
+        priceTextView.setText("" + quantity * price);
     }
 
     public void decreaseQuantity(View view) {
@@ -59,11 +70,34 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         TextView decreaseTextView = findViewById(R.id.realQuantity);
         decreaseTextView.setText("" + quantity);
+        TextView priceTextView = findViewById(R.id.actualPrice);
+        priceTextView.setText("" + quantity * price);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         goodsName = spinner.getSelectedItem().toString();
+        price = (double) goodsMap.get(goodsName);
+        TextView priceTextView = findViewById(R.id.actualPrice);
+        priceTextView.setText("" + quantity * price);
+
+        ImageView goodsImageView = findViewById(R.id.goodsImageView);
+
+        switch (goodsName){
+            case "guitar":
+                goodsImageView.setImageResource(R.drawable.guitar);
+                break;
+            case "drums":
+                goodsImageView.setImageResource(R.drawable.drums);
+                break;
+            case "keyboard":
+                goodsImageView.setImageResource(R.drawable.keyboard);
+                break;
+            default:
+                goodsImageView.setImageResource(R.drawable.guitar);
+                break;
+        }
+
 
     }
 
