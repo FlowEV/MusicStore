@@ -103,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 goodsImageView.setImageResource(R.drawable.guitar);
                 break;
         }
-
-
     }
 
     @Override
@@ -119,17 +117,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         order.userName = userNameEditText.getText().toString();
         order.goodsName = goodsName;
         order.quantity = quantity;
+        order.price = price;
         order.orderPrice = quantity * price;
 
         Intent orderIntent = new Intent(MainActivity.this, OrderActivity.class);
         orderIntent.putExtra("userNameForIntent", order.userName);
         orderIntent.putExtra("goodsName", order.goodsName);
         orderIntent.putExtra("quantity", order.quantity);
+        orderIntent.putExtra("price", order.price);
         orderIntent.putExtra("orderPrice", order.orderPrice);
 
-
         startActivity(orderIntent);
-
-
     }
 }
